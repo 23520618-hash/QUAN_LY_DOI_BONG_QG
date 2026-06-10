@@ -1,0 +1,100 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   APP LAYOUT — Global layout styles (Enhanced v2)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Main app wrapper */
+#root {
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Page content area — offset by navbar width */
+.app-content {
+  margin-left: 4rem; /* matches navbar collapsed width (w-16) */
+  min-height: 100vh;
+  transition: margin-left var(--transition-normal, 250ms);
+}
+
+@media (max-width: 768px) {
+  .app-content {
+    margin-left: 0;
+    padding-bottom: 4.5rem; /* space for mobile bottom nav */
+  }
+}
+
+/* Page transition wrapper — enhanced with slide + fade */
+.page-enter {
+  animation: pageSlideIn 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes pageSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.995);
+    filter: blur(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Background — ultra-premium animated mesh gradient */
+.app-bg {
+  position: relative;
+  min-height: 100vh;
+  background-color: #0f172a;
+  background-image: 
+    radial-gradient(at 0% 0%, hsla(353, 100%, 38%, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, hsla(210, 100%, 40%, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, hsla(35, 100%, 50%, 0.15) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, hsla(280, 100%, 40%, 0.15) 0px, transparent 50%);
+  background-attachment: fixed;
+  animation: meshBreathing 20s ease-in-out infinite alternate;
+}
+
+.app-bg::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(15,23,42,0.6) 0%, rgba(15,23,42,0.95) 100%);
+}
+
+.app-bg::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  mix-blend-mode: overlay;
+}
+
+@keyframes meshBreathing {
+  0% { 
+    background-image: 
+      radial-gradient(at 0% 0%, hsla(353, 100%, 38%, 0.2) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, hsla(210, 100%, 40%, 0.2) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, hsla(35, 100%, 50%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, hsla(280, 100%, 40%, 0.15) 0px, transparent 50%);
+  }
+  50% {
+    background-image: 
+      radial-gradient(at 100% 0%, hsla(353, 100%, 38%, 0.2) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, hsla(210, 100%, 40%, 0.2) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, hsla(35, 100%, 50%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 0% 0%, hsla(280, 100%, 40%, 0.15) 0px, transparent 50%);
+  }
+  100% {
+    background-image: 
+      radial-gradient(at 100% 100%, hsla(353, 100%, 38%, 0.2) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, hsla(210, 100%, 40%, 0.2) 0px, transparent 50%),
+      radial-gradient(at 0% 0%, hsla(35, 100%, 50%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, hsla(280, 100%, 40%, 0.15) 0px, transparent 50%);
+  }
+}
